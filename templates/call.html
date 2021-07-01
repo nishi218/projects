@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'style.css'%}">
+
+
+<style>
+* {box-sizing: border-box;}
+.naming{
+  float: right;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  float: right;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+.top{
+font-size:60px;
+margin-left:20px;
+margin-top: 50px;
+}
+
+.topnav .search-container {
+  float: centre;
+  padding-left:30px;
+}
+
+.topnav input[type=text] {
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 17px;
+  border: 5px solid red;
+}
+
+.topnav .search-container button {
+  
+  padding: 10px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  
+}
+
+.topnav .search-container button:hover {
+  background: yellow;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav .search-container {
+    float: none;
+  }
+  .topnav input[type=text], .topnav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type=text] {
+    border: 10px solid red;  
+  }
+  
+}
+
+</style>
+</head>
+<body>
+    
+    <div class="naming">
+      <h1> {{user.first_name}}  {{user.last_name}}</h1>
+      <a href="{%url 'logout'%}">
+        <button type="submit" class="btn">logout</button>
+      </a>
+    </div>
+    
+    
+    <h1 class="top">Call</h1>
+<form method="post">
+  {%csrf_token%}
+  <div class="topnav">
+    <div class="search-container">
+        <input type="text" placeholder="Search the username.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+</form>
+  <div>
+    {%for i in peer%}
+    <h2>{{i}}</h2>
+      <button id="myBtn" ><i class='material-icons' style='font-size:36px'>videocamera</i></button>
+    {%endfor%}
+  </div>
+  
+<div id="myModal" class="modal">
+  <form method="POST" action="{%url 'checkview' %}">
+      {% csrf_token %}
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>For video call</h2>
+      </div>
+      <div class="modal-body">
+        <label for='room name'><b>Enter the room name</b></label><br>
+        <input type="text" placeholder="Enter ROOM NAME" name="room_name"  required>
+      </div>
+        <div class="modal-footer">
+          <br>
+           <input type="submit" value="ENTER THE ROOM">
+        </div>
+    </div>
+  </form>
+
+</div>
+       
+  
+<script src="{% static 'modal.js' %}"></script>
+</body>
+</html>
