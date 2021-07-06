@@ -40,6 +40,7 @@ function webSocketOnMessage(event){
         createOfferer(receiver_channel_name);
 
     
+    }
 }
 const localVideo = document.querySelector('#local-video');
 var localStream = new MediaStream();

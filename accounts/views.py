@@ -70,7 +70,7 @@ def call(request):
 
 
 def room(request, room_name):
-    return render(request, "call_room.html")
+    return render(request, "call_room.html", {"room_name": room_name})
 
 
 def logout(request):
